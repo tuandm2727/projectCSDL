@@ -1,0 +1,49 @@
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="card mb-4">
+                <div class="card-header pb-0">
+                    <h6>Student List</h6>
+                </div>
+                <div class="card-body px-0 pt-0 pb-2">
+                    <div class="table-responsive p-0">
+                        <table class="table align-items-center mb-0">
+                            <thead>
+                            <tr style="font-size: 24px !important;">
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">STT</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Name</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Email</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Position</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"></th>
+                            </tr>
+                            </thead>
+                            <% if(data.length) { %>
+                            <tbody>
+                                <% for(var i = 0; i < data.length; i++) { %>
+                            <tr>
+                                <td><%= (i + 1) %></td>
+                                <td><%= data[i].name %></td>
+                                <td><%= data[i].email %></td>
+                                <td><%= data[i].position %></td>
+                                <td class="align-middle">
+                                    <a href="../student/edit/<%= data[i].id %>" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit">
+                                        Edit
+                                    </a>
+                                    <a href="../student/delete/<%= data[i].id %>" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Delete">
+                                        Delete
+                                    </a>
+                                </td>
+                            </tr>
+                                <% } %>
+                            </tbody>
+                            <% } %>
+                            <% if(!data.length) { %>
+                                <p class="text-center">No users found!</p>
+                            <% } %>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
