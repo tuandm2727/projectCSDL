@@ -2,8 +2,31 @@
     <div class="row">
         <div class="col-12">
             <div class="card mb-4">
-                <div class="card-header pb-0">
-                    <h6>Student List</h6>
+                <div class="card-header pb-0 p-3">
+                    <div class="row">
+                        <div class="col-8 d-flex align-items-center">
+                            <h6>Student List</h6>
+                        </div>
+                        <div class="col-4 text-end">
+                            <a class="btn btn-outline-primary btn-sm mb-0" href="/students/add" >Add</a>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="card-header pb-0 p-3">
+                <div class="row">
+                    <div class="col-9 d-flex align-items-center"></div>
+                    <div class="col-3 text-end">
+                        <form action="/students" method="get">
+                        <div class="input-group">
+                            <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" placeholder="Type here..." name="dataSearch" value="<%= dataSearch %>">
+                            <input type="submit" class="btn btn-outline-primary btn-sm mb-0" value="Search"></input>
+                        </div>
+                        </form>
+                    </div>
+                </div>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
                     <div class="table-responsive p-0">
@@ -13,7 +36,7 @@
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">STT</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Name</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Email</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Position</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">age</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"></th>
                             </tr>
                             </thead>
@@ -24,12 +47,12 @@
                                 <td><%= (i + 1) %></td>
                                 <td><%= data[i].name %></td>
                                 <td><%= data[i].email %></td>
-                                <td><%= data[i].position %></td>
+                                <td><%= data[i].age %></td>
                                 <td class="align-middle">
-                                    <a href="../student/edit/<%= data[i].id %>" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit">
+                                    <a href="/students/edit/<%= data[i].id %>" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit">
                                         Edit
                                     </a>
-                                    <a href="../student/delete/<%= data[i].id %>" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Delete">
+                                    <a href="/students/delete/<%= data[i].id %>" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Delete">
                                         Delete
                                     </a>
                                 </td>
@@ -42,6 +65,19 @@
                             <% } %>
                         </table>
                     </div>
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-end">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1"><i class="fas fa-angle-left"></i></a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#"><i class="fas fa-angle-right"></i></a>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
         </div>
