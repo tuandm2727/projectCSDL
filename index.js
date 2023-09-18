@@ -3,6 +3,7 @@ const expressLayouts = require('express-ejs-layouts');
 const path = require('path');
 const homeRoutes = require('./routes/home-routes');
 const studentRoutes = require('./routes/student-routes');
+const employeeRoutes = require('./routes/employee-routes');
 var flash = require('express-flash');
 var session = require('express-session');
 
@@ -27,6 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(homeRoutes.routes);
 app.use(flash());
 app.use(studentRoutes.routes);
+app.use(employeeRoutes.routes);
 
 app.listen(8080, () => console.log('app url http://localhost:8080'));
 

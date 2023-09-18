@@ -2,7 +2,7 @@ const express = require('express');
 
 const {studentSearch, studentViewAdd, studentSave, studentViewEdit,
     studentUpdate, studentDelete}
-    = require('../controllers/studentControler')
+    = require('../controllers/studentController')
 const router = express.Router();
 
 router.get('/students', studentSearch);

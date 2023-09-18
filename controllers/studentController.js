@@ -25,35 +25,6 @@ const studentSearch = (req, res, next) => {
     }
 }
 
-const studentSearchPaging = (req, res, next) => {
-    var numPerPage = 20;
-    var skip = (page - 1) * numPerPage;
-    var limit = skip + ',' + numPerPage;
-
-
-    let dataSearch = req.query.dataSearch;
-    console.log(dataSearch);
-    if (dataSearch == undefined || dataSearch == ''){
-        dbConn.query('SELECT * FROM student ORDER BY id desc',function(err,result)     {
-            if(result.rowCount == 0) {
-                req.flash('error', err);
-                res.render('students/studentList',{data:'', dataSearch: ''});
-            } else {
-                res.render('students/studentList',{data:result.rows, dataSearch: ''});
-            }
-        });
-    } else {
-        dbConn.query('SELECT * FROM student WHERE name LIKE $1 ORDER BY id desc', ['%' + dataSearch + '%'],function(err,result)     {
-            console.log(result);
-            if(result == undefined || result.rowCount == 0) {
-                req.flash('error', err);
-                res.render('students/studentList',{data:'', dataSearch: dataSearch});
-            } else {
-                res.render('students/studentList',{data:result.rows, dataSearch: dataSearch});
-            }
-        });
-    }
-}
 
 const studentViewAdd = (req, res, next) => {
     res.render('students/studentAdd', {
