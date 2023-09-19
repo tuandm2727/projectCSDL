@@ -13,7 +13,6 @@ const employeeSearch = (req, res, next) => {
         });
     } else {
         dbConn.query('SELECT * FROM employee WHERE name LIKE $1 ORDER BY id desc', ['%' + dataSearch + '%'],function(err,result)     {
-            console.log(result);
             if(result == undefined || result.rowCount == 0) {
                 req.flash('error', err);
                 res.render('employees/employeeList',{data:'', dataSearch: dataSearch});

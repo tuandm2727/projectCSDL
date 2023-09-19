@@ -1,47 +1,44 @@
 const dbConn  = require('../lib/db');
 
-const programSearch = (req, res, next) => {
+const lecturerSearch = (req, res, next) => {
     let dataSearch = req.query.dataSearch;
     if (dataSearch == undefined || dataSearch == ''){
-        dbConn.query('SELECT * FROM program ORDER BY id desc',function(err,result)     {
+        dbConn.query('SELECT * FROM lecturer ORDER BY id desc',function(err,result)     {
             if(result.rowCount == 0) {
                 req.flash('error', err);
-                res.render('programs/programList',{data:'', dataSearch: ''});
+                res.render('lecturers/lecturerList',{data:'', dataSearch: ''});
             } else {
-                res.render('programs/programList',{data:result.rows, dataSearch: ''});
+                res.render('lecturers/lecturerList',{data:result.rows, dataSearch: ''});
             }
         });
     } else {
-        dbConn.query('SELECT * FROM program WHERE name LIKE $1 ORDER BY id desc', ['%' + dataSearch + '%'],function(err,result)     {
+        dbConn.query('SELECT * FROM lecturer WHERE name LIKE $1 ORDER BY id desc', ['%' + dataSearch + '%'],function(err,result)     {
             if(result == undefined || result.rowCount == 0) {
                 req.flash('error', err);
-                res.render('programs/programList',{data:'', dataSearch: dataSearch});
+                res.render('lecturers/lecturerList',{data:'', dataSearch: dataSearch});
             } else {
-                res.render('programs/programList',{data:result.rows, dataSearch: dataSearch});
+                res.render('lecturers/lecturerList',{data:result.rows, dataSearch: dataSearch});
             }
         });
     }
 }
 
 
-const programViewAdd = (req, res, next) => {
-    res.render('programs/programAdd', {
+const lecturerViewAdd = (req, res, next) => {
+    res.render('lecturers/lecturerAdd', {
         name: '',
         code: '',
-        employee_id:''
+        birthday:'',
+        gender:''
 
     })
 }
 
-const programSave = (req, res, next) => {
+const lecturerSave = (req, res, next) => {
     let name = req.body.name;
     let code = req.body.code;
-    let employee_id = '';
-    if (req.body.employee_id == ''){
-        employee_id = null
-    } else {
-        employee_id = req.body.employee_id;
-    }
+    let birthday = req.body.birthday;
+    let gender = req.body.gender;
     let errors = false;
 
     if(name.length === 0) {
@@ -50,72 +47,72 @@ const programSave = (req, res, next) => {
         // set flash message
         req.flash('error', "Please enter name");
         // render to add.ejs with flash message
-        res.render('programs/programAdd', {
+        res.render('lecturers/lecturerAdd', {
             name: name,
             code: code,
-            employee_id: employee_id
+            birthday: birthday,
+            gender: gender
         })
     }
 
     // if no error
     if(!errors) {
         var form_data = [
-            name,code,employee_id
+            name,code,birthday,gender
         ];
         console.log(form_data);
         // insert query
-        dbConn.query('INSERT INTO program(name, code, employee_id) VALUES ($1, $2, $3);',
+        dbConn.query('INSERT INTO lecturer(name, code, birthday, gender) VALUES ($1, $2, $3, $4);',
             form_data,function(err, result) {
                 //if(err) throw err
                 if (err) {
                     req.flash('error', err)
                     // render to add.ejs
-                    res.render('programs/programAdd', {
+                    res.render('lecturers/lecturerAdd', {
                         name: name,
                         code: code,
-                        employee_id: employee_id
+                        birthday: birthday,
+                        gender: gender
                     })
                 } else {
-                    req.flash('success', 'program successfully added');
-                    res.redirect('/programs');
+                    req.flash('success', 'lecturer successfully added');
+                    res.redirect('/lecturers');
                 }
             })
     }
 }
 
-const programViewEdit = (req, res, next) => {
+const lecturerViewEdit = (req, res, next) => {
     let id = req.params.id;
 
-    dbConn.query('SELECT * FROM program WHERE id = ' + id, function(err, result, fields) {
+    dbConn.query('SELECT * FROM lecturer WHERE id = ' + id, function(err, result, fields) {
         if(err) throw err
 
         // if user not found
         if (result.length <= 0) {
             req.flash('error', 'User not found with id = ' + id)
-            res.redirect('programs/programList')
+            res.redirect('lecturers/lecturerList')
         }
         // if user found
         else {
             // render to edit.ejs
-            res.render('programs/programEdit', {
+            res.render('lecturers/lecturerEdit', {
                 id: result.rows[0].id,
                 name: result.rows[0].name,
                 code: result.rows[0].code,
-                employee_id: result.rows[0].employee_id
+                birthday: result.rows[0].birthday,
+                gender: result.rows[0].gender
             })
         }
     })
 }
 
-const programUpdate = (req, res, next) => {
+const lecturerUpdate = (req, res, next) => {
     let id = req.params.id;
     let name = req.body.name;
     let code = req.body.code;
-    if (req.body.employee_id == ''){
-        employee_id = null
-    } else {
-        employee_id = req.body.employee_id;
-    }
+    let birthday = req.body.birthday;
+    let gender = req.body.gender;
     let errors = false;
 
     if(name.length === 0) {
@@ -124,11 +121,12 @@ const programUpdate = (req, res, next) => {
         // set flash message
         req.flash('error', "Please enter name");
         // render to add.ejs with flash message
-        res.render('programs/programEdit', {
+        res.render('lecturers/lecturerEdit', {
             id: req.params.id,
             name: name,
             code: code,
-            employee_id: employee_id
+            birthday: birthday,
+            gender: gender
         })
     }
 
@@ -136,47 +134,48 @@ const programUpdate = (req, res, next) => {
     if( !errors ) {
 
         var form_data = [
-            name,code,employee_id
+            name,code,birthday,gender
         ];
         // update query
-        dbConn.query('UPDATE public.program SET name= $1, code= $2, employee_id= $3 WHERE id = ' + id
+        dbConn.query('UPDATE public.lecturer SET name= $1, code= $2, birthday= $3, gender= $4 WHERE id = ' + id
             , form_data, function(err, result) {
                 //if(err) throw err
                 if (err) {
                     // set flash message
                     req.flash('error', err)
                     // render to edit.ejs
-                    res.render('programs/programEdit', {
+                    res.render('lecturers/lecturerEdit', {
                         id: req.params.id,
                         name: name,
                         code: code,
-                        employee_id: employee_id
+                        birthday: birthday,
+                        gender: gender
                     })
                 } else {
-                    req.flash('success', 'program successfully updated');
-                    res.redirect('/programs');
+                    req.flash('success', 'lecturer successfully updated');
+                    res.redirect('/lecturers');
                 }
             })
     }
 }
 
-const programDelete = (req, res, next) => {
+const lecturerDelete = (req, res, next) => {
     let id = req.params.id;
 
-    dbConn.query('DELETE FROM program WHERE id = ' + id, function(err, result) {
+    dbConn.query('DELETE FROM lecturer WHERE id = ' + id, function(err, result) {
         //if(err) throw err
         if (err) {
             // set flash message
             req.flash('error', err)
             // redirect to user page
-            res.redirect('/programs')
+            res.redirect('/lecturers')
         } else {
             // set flash message
-            req.flash('success', 'program successfully deleted! ID = ' + id)
+            req.flash('success', 'lecturer successfully deleted! ID = ' + id)
             // redirect to user page
-            res.redirect('/programs')
+            res.redirect('/lecturers')
         }
     })
 }
 
-module.exports = {programSearch, programViewAdd, programSave, programViewEdit, programUpdate,programDelete}
+module.exports = {lecturerSearch, lecturerViewAdd, lecturerSave, lecturerViewEdit, lecturerUpdate,lecturerDelete}

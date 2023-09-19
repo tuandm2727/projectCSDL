@@ -13,7 +13,6 @@ const roomSearch = (req, res, next) => {
         });
     } else {
         dbConn.query('SELECT * FROM room WHERE name LIKE $1 ORDER BY id desc', ['%' + dataSearch + '%'],function(err,result)     {
-            console.log(result);
             if(result == undefined || result.rowCount == 0) {
                 req.flash('error', err);
                 res.render('rooms/roomList',{data:'', dataSearch: dataSearch});

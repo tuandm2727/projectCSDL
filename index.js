@@ -10,6 +10,7 @@ const employeeRoutes = require('./routes/employee-routes');
 const programRoutes = require('./routes/program-routes');
 const roomRoutes = require('./routes/room-routes');
 const subjectRoutes = require('./routes/subject-routes');
+const lecturerRoutes = require('./routes/lecturer-routes');
 
 const app = express();
 
@@ -37,6 +38,7 @@ app.use(programRoutes.routes);
 app.use(programRoutes.routes);
 app.use(roomRoutes.routes);
 app.use(subjectRoutes.routes);
+app.use(lecturerRoutes.routes);
 
 app.listen(8080, () => console.log('app url http://localhost:8080'));
 
