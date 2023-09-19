@@ -10512,7 +10512,7 @@ fieldset:disabled .btn {
 }
 
 .text-secondary {
-  color: #8392ab !important;
+  color: #000000 !important;
 }
 
 .text-success {
@@ -20854,7 +20854,7 @@ fieldset:disabled .btn {
 
 .card .card-body {
   font-family: "Open Sans", sans-serif;
-  padding: 1.5rem;
+  padding: 1.5rem !important;
 }
 
 .card.card-plain {
@@ -21495,7 +21495,7 @@ fieldset:disabled .btn {
 }
 
 .input-group> :not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
-  border-left: #fff !important;
+  /*border-left: #fff !important;*/
 }
 
 .input-group.focused .input-group-text {
@@ -24603,7 +24603,7 @@ hr.horizontal.gray-light {
 }
 
 .table> :not(:last-child)> :last-child>* {
-  border-bottom-color: #e9ecef;
+  border-bottom-color: #1c76d1;
 }
 
 .table> :not(:first-child) {
@@ -26934,3 +26934,6 @@ pre[class*="language-"] {
 }
 
 /*# sourceMappingURL=dashboard-free.css.map */
+.theadTable {
+  background: #5e72e4;
+}

@@ -2,7 +2,6 @@ const dbConn  = require('../lib/db');
 
 const studentSearch = (req, res, next) => {
     let dataSearch = req.query.dataSearch;
-    console.log(dataSearch);
     if (dataSearch == undefined || dataSearch == ''){
         dbConn.query('SELECT * FROM student ORDER BY id desc',function(err,result)     {
             if(result.rowCount == 0) {

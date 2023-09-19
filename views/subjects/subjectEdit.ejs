@@ -4,10 +4,10 @@
     <% } %>
     <div class="card">
         <div class="card-header">
-            Edit Employee
+            Edit Subject
         </div>
         <div class="card-body">
-            <form action="/employees/update/<%= id %>" method="post">
+            <form action="/subjects/update/<%= id %>" method="post">
                 <div class="form-group">
                     <label>Name:</label>
                     <input type="text" class="form-control" name="name" value="<%= name %>" autocomplete="off">
@@ -17,21 +17,12 @@
                     <input type="text" class="form-control" name="code" value="<%= code %>" autocomplete="off">
                 </div>
                 <div class="form-group">
-                    <label>Birthday:</label>
-                    <input type="text" class="form-control" name="birthday" value="<%= birthday.toISOString().slice(0, 10) %>" autocomplete="off">
+                    <label>Total_hours:</label>
+                    <input type="text" class="form-control" name="total_hours" value="<%= total_hours %>" autocomplete="off">
                 </div>
                 <div class="form-group">
-                    <label>Gender:</label>
-                    <select id="gender" name="gender" class="form-control" value="<%= gender %>">
-                        <% if (gender == 'Nam') { %>
-                            <option value="Nam" selected>Nam</option>
-                            <option value="Nữ">Nữ</option>
-                        <% } else { %>
-                            <option value="Nam">Nam</option>
-                            <option value="Nữ" selected>Nữ</option>
-                        <% } %>
-
-                    </select>
+                    <label>room_id:</label>
+                    <input type="text" class="form-control" name="room_id" value="<%= room_id %>" autocomplete="off">
                 </div>
                 <div class="form-group">
                     <input type="submit" class="btn btn-info" value="Update"/>

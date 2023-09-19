@@ -4,10 +4,10 @@
     <% } %>
     <div class="card">
         <div class="card-header">
-            Add Employee
+            Add Program
         </div>
         <div class="card-body">
-            <form action="/employees/save" method="post">
+            <form action="/programs/save" method="post">
                 <div class="form-group">
                     <label>Name:</label>
                     <input type="text" class="form-control" name="name" value="<%= name %>" autocomplete="off">
@@ -17,15 +17,8 @@
                     <input type="text" class="form-control" name="code" value="<%= code %>" autocomplete="off">
                 </div>
                 <div class="form-group">
-                    <label>Birthday:</label>
-                    <input type="text" class="form-control" name="birthday" value="<%= birthday %>" autocomplete="off">
-                </div>
-                <div class="form-group">
-                    <label>Gender:</label>
-                    <select name="gender" class="form-control" value="<%= gender %>">
-                        <option value="Nam" selected>Nam</option>
-                        <option value="Nữ">Nữ</option>
-                    </select>
+                    <label>employee_id:</label>
+                    <input type="text" class="form-control" name="employee_id" value="<%= employee_id %>" autocomplete="off">
                 </div>
                 <div class="form-group">
                     <input type="submit" class="btn btn-info" value="Add"/>
