@@ -1,0 +1,17 @@
+<% for(var i = 0; i < data.length; i++) { %>
+    <tr>
+        <td><%= (i + 1) %></td>
+        <td><%= data[i].name %></td>
+        <td><%= data[i].code %></td>
+        <td><%= data[i].birthday.toISOString().slice(0, 10) %></td>
+        <td><%= data[i].gender %></td>
+        <td class="align-middle">
+            <a href="/employees/edit/<%= data[i].id %>" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit">
+                Edit
+            </a>
+            <a href="/employees/delete/<%= data[i].id %>" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Delete">
+                Delete
+            </a>
+        </td>
+    </tr>
+<% } %>

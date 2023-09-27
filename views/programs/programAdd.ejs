@@ -18,12 +18,58 @@
                 </div>
                 <div class="form-group">
                     <label>employee_id:</label>
-                    <input type="text" class="form-control" name="employee_id" value="<%= employee_id %>" autocomplete="off">
+<!--                    <input type="text" class="form-control" name="employee_id" value="<%= employee_id %>" autocomplete="off">-->
                 </div>
                 <div class="form-group">
+                    <label>employee_id:</label>
+                    <select id="output" name="employee_id" class="form-control" value="<%= employee_id %>">
+                    </select>
+                </div>
+
+
+                <div class="form-group">
                     <input type="submit" class="btn btn-info" value="Add"/>
+                    <input id="submit" class="btn btn-info" value="search"/>
                 </div>
             </form>
         </div>
     </div>
 </div>
+<script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function () {
+        $("#submit").click(function () {
+            $.ajax({
+                url:"/programs/loadEmployee",
+                method:"GET",
+                data:{action:'fetch'},
+                dataType : "JSON",
+                success:function(result)
+                {
+                    console.log(result);
+                    console.log(result.data);
+
+                    var html = '';
+
+                    result.data.forEach(function(data){
+                            console.log(data);
+                            console.log(data.id);
+                            html +=  `<option value="`+ data.id + `">` + data.name + ` : ` + data.id +`</option>`;
+                        })
+                        // console.log(html);
+                        $('#output').html(html);
+                    }
+                });
+        });
+    });
+</script>
+
+
+
+
+
+
+

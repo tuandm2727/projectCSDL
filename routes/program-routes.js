@@ -1,8 +1,10 @@
 const express = require('express');
 
 const {programSearch, programViewAdd, programSave, programViewEdit,
-    programUpdate, programDelete}
+    programUpdate, programDelete, employeeLoad}
     = require('../controllers/programController')
+
+
 const router = express.Router();
 
 router.get('/programs', programSearch);
@@ -15,6 +17,7 @@ router.post('/programs/update/:id', programUpdate);
 
 router.get('/programs/delete/:id', programDelete);
 
+router.get('/programs/loadEmployee', employeeLoad);
 
 module.exports = {
     routes: router

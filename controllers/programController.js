@@ -25,12 +25,25 @@ const programSearch = (req, res, next) => {
 
 
 const programViewAdd = (req, res, next) => {
+    // res.json({data:''});
     res.render('programs/programAdd', {
-        name: '',
+        name: 'tuan',
         code: '',
-        employee_id:''
-
+        employee_id:'',
     })
+}
+
+const employeeLoad = (req, res, next) => {
+    dbConn.query('SELECT * FROM employee ORDER BY id desc',function(err,result)     {
+        if(result.rowCount == 0) {
+            req.flash('error', err);
+            console.log('return data empty');
+            res.send({data:''});
+        } else {
+            console.log('return data');
+            res.send({data:result.rows});
+        }
+    });
 }
 
 const programSave = (req, res, next) => {
@@ -179,4 +192,8 @@ const programDelete = (req, res, next) => {
     })
 }
 
-module.exports = {programSearch, programViewAdd, programSave, programViewEdit, programUpdate,programDelete}
+module.exports = {programSearch, programViewAdd, programSave, programViewEdit,
+    programUpdate,
+    programDelete,
+    employeeLoad
+}
